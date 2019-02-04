@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
+import firebase from 'firebase';
+import * as fconfig from '../../assets/configs/firebase.json';
 
 export default class SelectPage extends React.Component {
 
@@ -8,12 +10,15 @@ export default class SelectPage extends React.Component {
     rtDatabase = {};
 
     componentWillMount() {
-       /* if (!firebase.apps.length) {
+        console.log('burada');
+        if (!firebase.apps.length) {
             firebase.initializeApp(fconfig);
         } 
+        console.log(fconfig);
         this.firebaseApp = firebase.apps[0];
         this.rtDatabase = this.firebaseApp.database().ref('Users');
-        this.rtDatabase.push({ title: 'Eyüp Can Dündar' });*/
+        this.rtDatabase.push({ title: 'Eyüp Can Dündar' })
+        .catch(() => {  });
     }
 
     playGame(selectedrole) {

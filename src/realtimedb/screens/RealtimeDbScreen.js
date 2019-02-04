@@ -14,7 +14,7 @@ const RealtimeDbScreen = createStackNavigator(
             navigationOptions: ({ navigation }) => ({
                 title: 'Select Your Role',
                 headerTitle: 'Select Your Role',
-                headerTitleAllowFontScaling: true,
+                //headerTitleAllowFontScaling: true,
                 headerBackTitle: 'Geri',
                 headerTransparent: false,
                 headerLeft: () => (<Entypo.Button 
