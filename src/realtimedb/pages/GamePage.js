@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
+import firebase from 'firebase';
+import * as fconfig from '../../assets/configs/firebase.json';
 
 export default class GamePage extends React.Component {
     state = {
@@ -8,6 +10,8 @@ export default class GamePage extends React.Component {
         durum: ['', '', '', '', '', '', '', '', '']
     }
 
+    firebaseApp = {};
+    rtDatabase = {};
 
     setDurum(index) {
         const yenidizi = [...this.state.durum];
@@ -18,6 +22,7 @@ export default class GamePage extends React.Component {
             yenidizi[index] = this.state.role;
         }
         
+        this.rtDatabase.push({ Index: index, Role: yenidizi[index] });
 
         this.setState({ durum: yenidizi });
     }
@@ -49,6 +54,13 @@ export default class GamePage extends React.Component {
     componentWillMount() {
         console.log(this.props.navigation.state.params.role);
         this.setState({ role: this.props.navigation.state.params.role });
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(fconfig);
+        } 
+        console.log(fconfig);
+        this.firebaseApp = firebase.apps[0];
+        this.rtDatabase = this.firebaseApp.database().ref('Durum');
     }
 
     render() {
@@ -139,7 +151,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     cellStyle: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center'
     },
     sag: {
         borderRightWidth: 5,
@@ -155,6 +168,7 @@ const styles = StyleSheet.create({
     },
     iconStyle: {
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignSelf: 'center'
     }
 });
