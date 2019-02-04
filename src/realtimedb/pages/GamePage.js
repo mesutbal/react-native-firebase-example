@@ -27,6 +27,18 @@ export default class GamePage extends React.Component {
         this.setState({ durum: yenidizi });
     }
 
+    setDurumRemote(index, role) {
+        const yenidizi = [...this.state.durum];
+
+        if (yenidizi[index] !== '') {
+            yenidizi[index] = '';
+        } else {
+            yenidizi[index] = role;
+        }
+
+        this.setState({ durum: yenidizi });
+    }
+
     renderItem(index) {
         if (this.state.durum[index] === 'heart') {
             return (<Entypo.Button 
@@ -61,6 +73,14 @@ export default class GamePage extends React.Component {
         console.log(fconfig);
         this.firebaseApp = firebase.apps[0];
         this.rtDatabase = this.firebaseApp.database().ref('Durum');
+        this.rtDatabase.remove();
+
+        this.rtDatabase.orderByKey().limitToLast(1).on('child_added', (snapshot) => {
+            if (snapshot.val()) {
+                const item = snapshot.val();
+                this.setDurumRemote(item.Index, item.Role);
+            }
+        });
     }
 
     render() {
