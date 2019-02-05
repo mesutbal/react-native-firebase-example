@@ -3,6 +3,7 @@ import { View, Linking } from 'react-native';
 import { createStackNavigator, DrawerActions } from 'react-navigation';
 import Entypo from 'react-native-vector-icons/Entypo';
 import DataStoreList from './DataStoreList';
+import DataStoreDetail from './DataStoreDetail';
 
 
 const DataStoreScreen = createStackNavigator(
@@ -11,8 +12,8 @@ const DataStoreScreen = createStackNavigator(
             screen: ({ navigation }) => (
                 <DataStoreList style={{ padding: 10 }} navigation={navigation} />),
             navigationOptions: ({ navigation }) => ({
-                title: 'Müşteri Listesi',
-                headerTitle: 'Müşteri Listesi',
+                title: 'Personel Listesi',
+                headerTitle: 'Personel Listesi',
                 headerBackTitle: 'Geri',
                 headerTransparent: false,
                 headerLeft: () => (<Entypo.Button 
@@ -29,8 +30,18 @@ const DataStoreScreen = createStackNavigator(
                     backgroundColor="transparent"
                     underlayColor="transparent"
                     color="gray"
-                    onPress={() => { Linking.openURL('https://firebase.google.com/docs/database/'); }}
+                    onPress={() => { navigation.navigate('Detail'); }}
                 /></View>)
+            })
+        },
+        Detail: { 
+            screen: ({ navigation }) => (
+                <DataStoreDetail style={{ padding: 10 }} navigation={navigation} />),
+            navigationOptions: () => ({
+                title: 'Personel',
+                headerTitle: 'Personel',
+                headerBackTitle: 'Geri',
+                headerTransparent: false
             })
         }
     }, 
