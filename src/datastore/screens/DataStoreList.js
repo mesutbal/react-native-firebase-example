@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, FlatList } from 'react-native';
 import firebase from 'firebase';
 import firestore from 'firebase/firestore';
 import * as fconfig from '../../assets/configs/firebase.json';
+import DataStoreCell from './DataStoreCell.js';
 
 
 export default class DataStoreList extends React.Component {
@@ -38,17 +39,18 @@ export default class DataStoreList extends React.Component {
         // eslint-disable-next-line no-underscore-dangle
         const _personels = [];
         snapshot.forEach((item) => {
-            const { adi, soyadi, sicil, telefon, birim } = item.data();
+            const { Adi, Soyadi, Sicil, Telefon, Birim } = item.data();
             _personels.push({
                 key: item.id,
                 doc: item,
-                adi,
-                soyadi,
-                sicil,
-                telefon,
-                birim
+                adi: Adi,
+                soyadi: Soyadi,
+                sicil: Sicil,
+                telefon: Telefon,
+                birim: Birim
             });
         });        
+        console.log(_personels);
         this.setState({
             personels: _personels,
             loading: false
@@ -68,11 +70,19 @@ export default class DataStoreList extends React.Component {
         </View>);
     }
 
+    renderList() {
+        return (<FlatList 
+            data={this.state.personels}
+            keyExtractor={(item, index) => `list-item${index}`}
+            renderItem={({ item }) => <DataStoreCell navigation={this.props.navigation} personel={item} />}
+        />);
+    }
+
     render() {
         if (this.state.loading) {
             return this.renderLoading();
         }
-        return (<View style={{ flex: 1, backgroundColor: 'yellow' }} />);
+        return this.renderList();
     }
 }
 
