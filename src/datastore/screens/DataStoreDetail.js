@@ -13,7 +13,9 @@ export default class DataStoreDetail extends React.Component {
         sicil: '',
         telefon: '',
         birim: '',
-        loading: false
+        personel: {},
+        loading: false,
+        mevcutkayit: false
     }
 
     fsDatabase = {};
@@ -24,6 +26,20 @@ export default class DataStoreDetail extends React.Component {
         }
         this.firebaseApp = firebase.apps[0];
         this.fsDatabase = firebase.firestore().collection('personel'); 
+
+        
+        if (this.props.navigation.state.params.personel) {
+            const personel = this.props.navigation.state.params.personel;
+            this.setState({
+                adi: personel.adi,
+                soyadi: personel.soyadi,
+                sicil: personel.sicil,
+                telefon: personel.telefon,
+                birim: personel.birim,
+                mevcutkayit: true,
+                personel
+            });
+        }
     }
 
     savePersonel() {
