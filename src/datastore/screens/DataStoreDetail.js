@@ -28,7 +28,7 @@ export default class DataStoreDetail extends React.Component {
         this.fsDatabase = firebase.firestore().collection('personel'); 
 
         
-        if (this.props.navigation.state.params.personel) {
+        if (this.props.navigation.state.params) {
             const personel = this.props.navigation.state.params.personel;
             this.setState({
                 adi: personel.adi,
@@ -42,10 +42,27 @@ export default class DataStoreDetail extends React.Component {
         }
     }
 
-    savePersonel() {
-        this.setState({ loading: true });
-
+    addPersonel() {
         this.fsDatabase.add({
+            Adi: this.state.adi,
+            Soyadi: this.state.soyadi,
+            Sicil: this.state.sicil,
+            Telefon: this.state.telefon,
+            Birim: this.state.birim,
+        }).then(() => {
+            this.setState({ loading: false }); 
+            this.props.navigation.goBack();
+        })
+        .catch((error) => {
+            console.error(error);
+            this.setState({ loading: false }); 
+            Alert.alert('Firebase App', 'Personel eklenemedi !');
+        });
+    }
+
+    updatePersonel() {
+        console.log(this.state.personel);
+        this.fsDatabase.doc(this.state.personel.key).set({
             Adi: this.state.adi,
             Soyadi: this.state.soyadi,
             Sicil: this.state.sicil,
@@ -60,6 +77,16 @@ export default class DataStoreDetail extends React.Component {
             this.setState({ loading: false }); 
             Alert.alert('Firebase App', 'Personel kaydedilemedi !');
         });
+    }
+
+    savePersonel() {
+        this.setState({ loading: true });
+
+        if (this.state.mevcutkayit) {
+            this.updatePersonel();
+        } else {
+            this.addPersonel();
+        }
     }
 
     render() {
