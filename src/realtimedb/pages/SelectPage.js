@@ -10,7 +10,7 @@ export default class SelectPage extends React.Component {
     rtDatabase = {};
 
     componentWillMount() {
-        console.log('burada');
+        /*console.log('burada');
         if (!firebase.apps.length) {
             firebase.initializeApp(fconfig);
         } 
@@ -18,7 +18,7 @@ export default class SelectPage extends React.Component {
         this.firebaseApp = firebase.apps[0];
         this.rtDatabase = this.firebaseApp.database().ref('Users');
         this.rtDatabase.push({ title: 'Eyüp Can Dündar' })
-        .catch(() => {  });
+        .catch(() => {  });*/
     }
 
     playGame(selectedrole) {

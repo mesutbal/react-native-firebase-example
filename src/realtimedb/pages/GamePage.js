@@ -13,6 +13,26 @@ export default class GamePage extends React.Component {
     firebaseApp = {};
     rtDatabase = {};
 
+    componentWillMount() {
+        console.log(this.props.navigation.state.params.role);
+        this.setState({ role: this.props.navigation.state.params.role });
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(fconfig);
+        } 
+        console.log(fconfig);
+        this.firebaseApp = firebase.apps[0];
+        this.rtDatabase = this.firebaseApp.database().ref('Durum');
+        this.rtDatabase.remove();
+
+        this.rtDatabase.orderByKey().limitToLast(1).on('child_added', (snapshot) => {
+            if (snapshot.val()) {
+                const item = snapshot.val();
+                this.setDurumRemote(item.Index, item.Role);
+            }
+        });
+    }
+
     setDurum(index) {
         const yenidizi = [...this.state.durum];
 
@@ -61,26 +81,6 @@ export default class GamePage extends React.Component {
                 style={styles.iconStyle}
             />);
         }
-    }
-
-    componentWillMount() {
-        console.log(this.props.navigation.state.params.role);
-        this.setState({ role: this.props.navigation.state.params.role });
-
-        if (!firebase.apps.length) {
-            firebase.initializeApp(fconfig);
-        } 
-        console.log(fconfig);
-        this.firebaseApp = firebase.apps[0];
-        this.rtDatabase = this.firebaseApp.database().ref('Durum');
-        this.rtDatabase.remove();
-
-        this.rtDatabase.orderByKey().limitToLast(1).on('child_added', (snapshot) => {
-            if (snapshot.val()) {
-                const item = snapshot.val();
-                this.setDurumRemote(item.Index, item.Role);
-            }
-        });
     }
 
     render() {
