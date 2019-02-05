@@ -1,6 +1,7 @@
 {
     "extends": "rallycoding",
     "rules" : {
-        "react/sort-comp" : 0
+        "react/sort-comp" : 0,
+        "global-require" : 0
     }
  }
