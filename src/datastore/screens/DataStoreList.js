@@ -31,7 +31,7 @@ export default class DataStoreList extends React.Component {
 
     componentDidMount() {
         console.log('componentDidMount');
-        this.unsubscribe = this.fsDatabase.onSnapshot(this.onUpdate);
+        this.unsubscribe = this.fsDatabase.get().onSnapshot(this.onUpdate);
     }
 
     onUpdate = (snapshot) => {
@@ -70,8 +70,16 @@ export default class DataStoreList extends React.Component {
         </View>);
     }
 
+    onRefreshData() {
+        this.setState({ loading: true });
+        //this.loadData();
+        //this.setState({ loading: false });
+    }
+
     renderList() {
         return (<FlatList 
+            refreshing={this.state.loading}
+            onRefresh={() => this.onRefreshData()}
             data={this.state.personels}
             keyExtractor={(item, index) => `list-item${index}`}
             renderItem={({ item }) => <DataStoreCell navigation={this.props.navigation} personel={item} />}

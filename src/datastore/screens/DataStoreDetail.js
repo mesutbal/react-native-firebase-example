@@ -91,7 +91,11 @@ export default class DataStoreDetail extends React.Component {
 
     render() {
         return (
-        <ScrollView style={{ flex: 1, padding: 20 }} >
+        <ScrollView 
+            style={{ flex: 1, padding: 20 }} 
+            keyboardShouldPersistTaps='always'
+            keyboardDismissMode={'interactive'}
+        >
             <TextInput 
                 mode="outlined"
                 label="Personel Adı"
