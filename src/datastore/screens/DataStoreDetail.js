@@ -5,6 +5,7 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import firebase from 'firebase';
 import firestore from 'firebase/firestore';
 import * as fconfig from '../../assets/configs/firebase.json';
+import Moment from 'moment';
 
 export default class DataStoreDetail extends React.Component {
 
@@ -73,6 +74,7 @@ export default class DataStoreDetail extends React.Component {
             Sicil: this.state.sicil,
             Telefon: this.state.telefon,
             Birim: this.state.birim,
+            DogumTarihi: this.state.dogumtarihi
         }).then(() => {
             this.setState({ loading: false }); 
             this.props.navigation.goBack();
@@ -111,10 +113,11 @@ export default class DataStoreDetail extends React.Component {
 
     renderTouchText = props => {
         const { style, value } = props;
+        const dvalue = value ? Moment(value).format('DD/MM/YYYY') : '';
 
         return (
             <TouchableOpacity onPress={this.handleOpen}>
-                <Text style={style}>{value}</Text>
+                <Text style={style}>{dvalue}</Text>
             </TouchableOpacity>
         );
     };
