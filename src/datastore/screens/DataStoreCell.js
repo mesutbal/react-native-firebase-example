@@ -26,6 +26,12 @@ export default class DataStoreCell extends React.Component {
                 backgroundColor: 'red',
                 underlayColor: 'gray',
                 onPress: () => { this.deleteData(); }
+            },
+            {
+                text: 'Detay',
+                backgroundColor: 'blue',
+                underlayColor: 'gray',
+                onPress: () => { this.onItemClick(); }
             }
         ];
 

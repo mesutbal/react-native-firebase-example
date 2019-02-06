@@ -1,6 +1,7 @@
-import React from 'react';
-import { ScrollView, StyleSheet, Alert } from 'react-native';
+import React, { createRef } from 'react';
+import { ScrollView, StyleSheet, Alert, View, TouchableOpacity, Text, Keyboard } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import firebase from 'firebase';
 import firestore from 'firebase/firestore';
 import * as fconfig from '../../assets/configs/firebase.json';
@@ -13,12 +14,15 @@ export default class DataStoreDetail extends React.Component {
         sicil: '',
         telefon: '',
         birim: '',
+        dogumtarihi: undefined,
+        open: false,
         personel: {},
         loading: false,
         mevcutkayit: false
     }
 
     fsDatabase = {};
+
 
     componentWillMount() {
         if (!firebase.apps.length) {
@@ -36,6 +40,7 @@ export default class DataStoreDetail extends React.Component {
                 sicil: personel.sicil,
                 telefon: personel.telefon,
                 birim: personel.birim,
+                dogumtarihi: undefined,
                 mevcutkayit: true,
                 personel
             });
@@ -89,7 +94,35 @@ export default class DataStoreDetail extends React.Component {
         }
     }
 
+
+    handleChange = dogumtarihi => {
+        this.handleClose();
+        this.setState({ dogumtarihi });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+    handleOpen = () => {
+        Keyboard.dismiss();
+        this.setState({ open: true });
+    };
+
+    renderTouchText = props => {
+        const { style, value } = props;
+
+        return (
+            <TouchableOpacity onPress={this.handleOpen}>
+                <Text style={style}>{value}</Text>
+            </TouchableOpacity>
+        );
+    };
+
     render() {
+        const { dogumtarihi, open } = this.state;
+        const dvalue = dogumtarihi ? dogumtarihi.toLocaleString() : '';
+
         return (
         <ScrollView 
             style={{ flex: 1, padding: 20 }} 
@@ -131,6 +164,25 @@ export default class DataStoreDetail extends React.Component {
                 onChangeText={birim => this.setState({ birim })}
                 style={styles.textStyle}
             />
+            
+            <View style={{ flex: 1, justifyContent: 'center' }}>
+                <TextInput
+                    mode='outlined'
+                    label='Dogum Tarihi'
+                    ref={this.textInput}
+                    render={this.renderTouchText}
+                    value={dvalue}
+                    style={styles.textStyle}
+                />
+                <DateTimePicker
+                    mode='date'
+                    date={dogumtarihi}
+                    isVisible={open}
+                    onConfirm={this.handleChange}
+                    onCancel={this.handleClose}
+                />
+            </View>
+
             <Button 
                 style={styles.textStyle}
                 loading={this.state.loading}
