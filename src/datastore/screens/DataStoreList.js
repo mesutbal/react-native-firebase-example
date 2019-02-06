@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import firestore from 'firebase/firestore';
 import * as fconfig from '../../assets/configs/firebase.json';
 import DataStoreCell from './DataStoreCell.js';
+import Moment from 'moment';
 
 
 export default class DataStoreList extends React.Component {
@@ -39,7 +40,8 @@ export default class DataStoreList extends React.Component {
         // eslint-disable-next-line no-underscore-dangle
         const _personels = [];
         snapshot.forEach((item) => {
-            const { Adi, Soyadi, Sicil, Telefon, Birim } = item.data();
+            const { Adi, Soyadi, Sicil, Telefon, Birim, DogumTarihi } = item.data();
+            const dvalue = DogumTarihi ? Moment(DogumTarihi).format('DD/MM/YYYY') : '';
             _personels.push({
                 key: item.id,
                 doc: item,
@@ -47,10 +49,11 @@ export default class DataStoreList extends React.Component {
                 soyadi: Soyadi,
                 sicil: Sicil,
                 telefon: Telefon,
-                birim: Birim
+                birim: Birim,
+                dogumtarihi: dvalue
             });
         });        
-        console.log(_personels);
+        //console.log(_personels);
         this.setState({
             personels: _personels,
             loading: false

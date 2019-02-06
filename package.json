@@ -11,6 +11,7 @@
     "moment": "^2.24.0",
     "react": "16.6.3",
     "react-native": "0.58.3",
+    "react-native-fcm": "^16.2.4",
     "react-native-gesture-handler": "^1.0.15",
     "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-paper": "^2.7.0",

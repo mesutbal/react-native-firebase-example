@@ -53,6 +53,7 @@ export default class DataStoreCell extends React.Component {
                 <Text style={[styles.textStyle]}>{this.props.personel.sicil}</Text>
                 <Text style={[styles.textStyle]}>{this.props.personel.telefon}</Text>
                 <Text style={[styles.textStyle]}>{this.props.personel.birim}</Text>
+                <Text style={[styles.textStyle]}>{this.props.personel.dogumtarihi}</Text>
             </TouchableOpacity>
         </Swipeout>);
     }

@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "478496624060",
+    "firebase_url": "https://fir-app-2fbd5.firebaseio.com",
+    "project_id": "fir-app-2fbd5",
+    "storage_bucket": "fir-app-2fbd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478496624060:android:cb6a43ea4dc3dd67",
+        "android_client_info": {
+          "package_name": "com.firebaseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478496624060-el3hq1v2b0o915qt1h68e4bbsdktgk98.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFfmxZ2tinWf7tUcRAFkZ5rPSoGGJ0VJw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478496624060:android:ac8b4337dcb717e1",
+        "android_client_info": {
+          "package_name": "com.metkonmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478496624060-el3hq1v2b0o915qt1h68e4bbsdktgk98.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFfmxZ2tinWf7tUcRAFkZ5rPSoGGJ0VJw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
